@@ -1,0 +1,238 @@
+
+/* Base / font */
+body {
+  font-family: "Montserrat", system-ui,  "Segoe UI", "Helvetica Neue", Arial;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #eef2f6;
+  margin: 0;
+  position: relative;
+}
+
+/* Background: darker image with subtle vignette */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  z-index: -1;
+  background-image:
+    linear-gradient(180deg, rgba(94, 56, 31, 0.5), rgba(92, 81, 22, 0.7)),
+    url("https://static.vecteezy.com/system/resources/thumbnails/020/069/751/small_2x/business-performance-monitoring-concept-businessman-using-smartphone-online-survey-filling-out-digital-form-checklist-blue-background-photo.jpg" );
+ background-size: cover;
+  background-position: center;
+  filter: saturate(0.9) contrast(0.95);
+}
+
+/* Box sizing */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Theme variables (easy to tweak) */
+:root{
+  --bg-card: rgba(255,255,255,0.06);
+  --card-border: rgba(255,255,255,0.10);
+  --muted: #cbd5e1;
+  --accent: #ff6b5f; /* coral accent (different from typical teal) */
+  --accent-2: #ff9478;
+  --input-bg: rgba(255,255,255,0.96);
+  --success: #2dd4bf;
+  --radius: 14px;
+}
+
+/* Header layout */
+.header { padding: 0 0.75rem; margin-bottom: 1.375rem; }
+header { display:block; }
+.text-center { text-align: center; }
+
+/* Titles */
+h1, p { margin: 0 0 0.5rem 0; }
+h1 {
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  font-size: 1.5rem;
+}
+.description {
+    color: #d1d9e2;
+  font-style: italic;
+  font-weight: 400;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.35);
+  margin-top: 6px;
+}
+
+/* Container width/responsiveness */
+.container {
+  width: 100%;
+  max-width: 680px; /* slightly wider than before for a unique feel */
+  margin: 3.25rem auto 0;
+  padding: 0 16px;
+  animation: floatIn .5s ease both;
+}
+
+/* Float-in entrance */
+@keyframes floatIn {
+  from { transform: translateY(10px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+/* Form card: glassmorphism + soft shadow */
+form {
+  background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(255,255,255,0.06));
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(8px) saturate(2.05);
+  padding: 2.2rem 1rem;
+  border-radius: var(--radius);
+  box-shadow: 0 12px 40px rgba(211, 214, 37, 0.2);
+}
+
+/* Form groups */
+.form-group {
+  margin: 0 auto 1.125rem;
+  padding: 0.25rem;
+}
+
+/* Labels */
+label {
+  display: block;
+  font-size: 1.03rem;
+  color: #f4f7fb;
+  margin-bottom: 0.45rem;
+  cursor: default;
+}
+
+/* Inputs: rounded, subtle inner shadow */
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 2.6rem;
+  padding: 0.56rem 0.9rem;
+  color: #0b1a1f;
+  background: var(--input-bg);
+  border: 1px solid rgba(15,20,25,0.06);
+  border-radius: 10px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  font-size: 0.97rem;
+}
+
+/* Focus state */
+.form-control:focus {
+  outline: none;
+  transform: translateY(-1px);
+  border-color: rgba(255,107,95,0.9);
+  box-shadow: 0 6px 22px rgba(255,107,95,0.08);
+}
+
+/* Textarea */
+.input-textarea {
+  min-height: 140px;
+  padding: 0.85rem;
+  border-radius: 10px;
+  resize: vertical;
+}
+
+/* small helper text */
+.clue {
+  margin-left: 0.25rem;
+  font-size: 0.9rem;
+  color: #d6dbe2;
+}
+
+/* Radio & checkbox: custom look */
+.input-radio,
+.input-checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-right: 0.6rem;
+  border-radius: 4px;
+  border: 2px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+  transition:
+  background 0.20s ease,
+  border-color 0.20s ease,
+  transform 0.12s ease-out,
+  box-shadow 0.22s ease;
+
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+/* Radio round */
+.input-radio { border-radius: 50%; }
+
+/* checked state */
+.input-checkbox:checked,
+.input-radio:checked {
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  border-color: rgba(255,255,255,0.14);
+  transform: scale(0.98);
+}
+
+/* add visible checkmark for checkbox */
+.input-checkbox:checked::after {
+  content: "✅";
+  font-size: 0.75rem;
+  color: white;
+  line-height: 1;
+}
+
+/* add dot for radio */
+.input-radio:checked::after {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: rgb(17, 206, 58);
+  display: block;
+}
+
+/* options layout */
+.options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Submit button: pill style and gradient */
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 0.78rem;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: rgb(17, 206, 58);
+  border-radius: 999px; /* pill */
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 10px 30px rgba(255,107,95,0.12);
+  transition: transform 0.14s ease, box-shadow 0.14s ease, opacity 0.12s ease;
+}
+
+/* hover / active */
+.submit-button:hover { transform: translateY(-2px); box-shadow: 0 18px 50px rgba(255,107,95,0.14); }
+.submit-button:active { transform: translateY(0); opacity: 0.98; }
+
+/* smaller screens tweaks */
+@media (max-width: 520px) {
+  .container { padding: 0 12px; margin-top: 2.25rem; }
+  h1 { font-size: 1.25rem; }
+  .form-control { min-height: 2.2rem; padding: 0.5rem 0.7rem; }
+}
+
+/* little accessibility improvement */
+label[for] { cursor: pointer; }
+
+/* subtle focus ring for keyboard users */
+.form-control:focus,
+.input-radio:focus,
+.input-checkbox:focus,
+.submit-button:focus {
+  outline: 3px solid rgba(255,107,95,0.12);
+  outline-offset: 3px;
+}
